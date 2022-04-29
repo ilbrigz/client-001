@@ -1,11 +1,10 @@
 import { Button } from '@mantine/core';
 import Image from 'next/image';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 type Props = {};
 
 function sandbox({}: Props) {
-  const { data: session } = useSession();
   return (
     <Button
       variant="white"
