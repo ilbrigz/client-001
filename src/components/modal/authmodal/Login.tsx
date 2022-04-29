@@ -14,8 +14,9 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { TextInput } from '@mantine/core';
 import { signIn, SignInResponse } from 'next-auth/react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Box } from '@mantine/core';
+import { Box, Checkbox } from '@mantine/core';
 import GoogleBtn from './GoogleBtn';
+import Label from '@components/common/termsAndServicesLabel';
 type Props = { recaptchaRef: React.RefObject<ReCAPTCHA> };
 
 const Login = (props: Props) => {
@@ -24,6 +25,7 @@ const Login = (props: Props) => {
     email: '',
     password: '',
   });
+  const [tosChecked, setTosChecked] = React.useState(false);
   const [error, setError] = React.useState('');
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -42,9 +44,13 @@ const Login = (props: Props) => {
   const onLogin: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const { recaptchaRef } = props;
+
     if (!credential.email || !credential.password) {
       setError('Email and Password must not be empty');
       return;
+    }
+    if (!tosChecked) {
+      setError('You need to accept our Terms of Services');
     }
     try {
       const token = await recaptchaRef.current?.executeAsync();
@@ -91,6 +97,14 @@ const Login = (props: Props) => {
         <Text color="red.500" fontSize={12} mt={3}>
           {error}
         </Text>
+        <Checkbox
+          label={<Label />}
+          checked={tosChecked}
+          onChange={(event) => {
+            setError('');
+            setTosChecked(event.currentTarget.checked);
+          }}
+        />
         <Flex mt={3}>
           {' '}
           <Text fontSize={12}>New Here?</Text>
