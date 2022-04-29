@@ -45,7 +45,7 @@ export default function Hero({}: Props) {
         </Title>
         <Text>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Necessitatibus non 2{' '}
+          Necessitatibus non 0{' '}
         </Text>
         <ActionIcon
           onClick={() => {
