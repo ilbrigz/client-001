@@ -51,6 +51,7 @@ const Login = (props: Props) => {
     }
     if (!tosChecked) {
       setError('You need to accept our Terms of Services');
+      return;
     }
     try {
       const token = await recaptchaRef.current?.executeAsync();
