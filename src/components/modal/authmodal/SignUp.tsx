@@ -14,6 +14,8 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import ReCAPTCHA from 'react-google-recaptcha';
+import GoogleBtn from './GoogleBtn';
+import { Box } from '@mantine/core';
 
 type Props = { recaptchaRef: React.RefObject<ReCAPTCHA> };
 
@@ -87,7 +89,6 @@ const SignUp = (props: Props) => {
     <>
       <form onSubmit={onSignUp}>
         <ModalBody>
-          {' '}
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Input
@@ -129,11 +130,11 @@ const SignUp = (props: Props) => {
           </Text>
           <Flex mt={3}>
             {' '}
-            <Text fontSize={10}>Already Have an Account? </Text>
+            <Text fontSize={12}>Already Have an Account? </Text>
             <Text
               color="blue.500"
               fontWeight={700}
-              fontSize={10}
+              fontSize={12}
               cursor="pointer"
               onClick={() =>
                 setAuthModalState((prev) => ({ ...prev, view: 'login' }))
@@ -144,13 +145,34 @@ const SignUp = (props: Props) => {
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} type="submit">
+          <Button colorScheme="blue" mr={3} type="submit" size="sm">
             Sign Up
           </Button>
-          <Button variant="outline" onClick={closeModal} colorScheme={'red'}>
+          <Button
+            variant="outline"
+            onClick={closeModal}
+            colorScheme={'red'}
+            size="sm"
+          >
             Cancel
           </Button>
         </ModalFooter>
+        <Box
+          mb={25}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            sx={{ fontSize: '12px', marginBottom: '15px', fontWeight: 700 }}
+          >
+            {' '}
+            OR{' '}
+          </Text>
+          <GoogleBtn />
+        </Box>
       </form>
     </>
   );

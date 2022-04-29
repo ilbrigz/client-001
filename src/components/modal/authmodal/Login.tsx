@@ -14,7 +14,8 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { TextInput } from '@mantine/core';
 import { signIn, SignInResponse } from 'next-auth/react';
 import ReCAPTCHA from 'react-google-recaptcha';
-
+import { Box } from '@mantine/core';
+import GoogleBtn from './GoogleBtn';
 type Props = { recaptchaRef: React.RefObject<ReCAPTCHA> };
 
 const Login = (props: Props) => {
@@ -92,29 +93,48 @@ const Login = (props: Props) => {
         </Text>
         <Flex mt={3}>
           {' '}
-          <Text fontSize={10}>New Here?</Text>
+          <Text fontSize={12}>New Here?</Text>
           <Text
             color="blue.500"
             fontWeight={700}
-            fontSize={10}
+            fontSize={12}
             cursor="pointer"
             onClick={() =>
               setAuthModalState((prev) => ({ ...prev, view: 'signup' }))
             }
-            onError={() => console.log('somthing went wrong')}
+            onError={() => console.log('something went wrong')}
           >
             &nbsp; SIGN UP
           </Text>
         </Flex>
       </ModalBody>
       <ModalFooter>
-        <Button colorScheme="blue" mr={3} type="submit">
+        <Button colorScheme="blue" mr={3} type="submit" size="sm">
           Login
         </Button>
-        <Button variant="outline" onClick={closeModal} colorScheme={'red'}>
+        <Button
+          variant="outline"
+          onClick={closeModal}
+          colorScheme={'red'}
+          size="sm"
+        >
           Cancel
         </Button>
       </ModalFooter>
+      <Box
+        mb={25}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Text sx={{ fontSize: '12px', marginBottom: '15px', fontWeight: 700 }}>
+          {' '}
+          OR{' '}
+        </Text>
+        <GoogleBtn />
+      </Box>
     </form>
   );
 };

@@ -12,8 +12,8 @@ import { authModalState } from 'atom/authModal';
 import { SessionContextValue, signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import Login from './Login';
-import SignUp from './SignUp';
+import Login from './authmodal/Login';
+import SignUp from './authmodal/SignUp';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 type Props = {};
