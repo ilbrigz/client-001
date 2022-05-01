@@ -1,10 +1,10 @@
 import { ActionIcon, Text, Title } from '@mantine/core';
 import React from 'react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
 import Octo from '@components/common/Octo';
 import { authModalState } from 'atom/authModal';
 import { useSetRecoilState } from 'recoil';
-import { createStyles, Center, Stack, Box } from '@mantine/core';
+import { createStyles, Center } from '@mantine/core';
+import { AiFillCaretDown } from 'react-icons/ai';
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   wrapper: { height: '95vh', display: 'flex', flexDirection: 'column' },
@@ -21,9 +21,23 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     marginTop: '-25px',
     zIndex: -5,
     position: 'relative',
-    // '& img': {
-    //   border: '1px solid red',
-    // },
+  },
+  icon: {
+    marginTop: '20px',
+    padding: 10,
+    height: '50px',
+    width: '50px',
+    border: '1px solid',
+    borderColor: theme.colors.gray[1],
+    '&:hover svg': {
+      fill: theme.colors.gray[7],
+    },
+  },
+  OctoWrapper: {
+    marginTop: '2rem',
+    width: '100px',
+    height: '100px',
+    fill: theme.white,
   },
 }));
 
@@ -48,34 +62,19 @@ export default function Hero({}: Props) {
           Necessitatibus non 0{' '}
         </Text>
         <ActionIcon
-          onClick={() => {
+          className={classes.icon}
+          onClick={() =>
             setAuthModalState((prev) => ({
               ...prev,
               open: true,
-            }));
-          }}
-          sx={(theme) => ({
-            borderColor: 'white',
-            color: 'white',
-            padding: '20px',
-            '&:hover': {
-              color: theme.colors.dark[5],
-            },
-          })}
-          mt="1.5rem"
+            }))
+          }
         >
-          <TriangleDownIcon />
+          <AiFillCaretDown size="5em" color="white" />
         </ActionIcon>
-        <Box
-          sx={(theme) => ({
-            marginTop: '2rem',
-            width: '100px',
-            height: '100px',
-            fill: theme.white,
-          })}
-        >
+        <div className={classes.OctoWrapper}>
           <Octo />
-        </Box>
+        </div>
       </Center>
       <div className={classes.wave}>
         <img src="/wave.svg" />

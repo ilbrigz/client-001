@@ -1,20 +1,10 @@
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  ModalBody,
-  ModalFooter,
-  Text,
-} from '@chakra-ui/react';
+import { Button, Flex, ModalBody, ModalFooter, Text } from '@chakra-ui/react';
 import { authModalState } from 'atom/authModal';
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { TextInput } from '@mantine/core';
 import { signIn, SignInResponse } from 'next-auth/react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Box, Checkbox } from '@mantine/core';
+import { Box, Checkbox, InputWrapper, Input } from '@mantine/core';
 import GoogleBtn from './GoogleBtn';
 import Label from '@components/common/termsAndServicesLabel';
 type Props = { recaptchaRef: React.RefObject<ReCAPTCHA> };
@@ -80,21 +70,40 @@ const Login = (props: Props) => {
     <form onSubmit={onLogin}>
       <ModalBody>
         {' '}
-        <TextInput
-          label="Your email"
-          placeholder="email"
-          name="email"
-          onChange={handleChange}
-          value={credential.email}
-        />
-        <TextInput
-          name="password"
-          value={credential.password}
-          type="password"
-          onChange={handleChange}
+        <InputWrapper
+          id="input-demo"
+          required
+          label="Email"
+          // description="Please enter your credit card information, we need some money"
+          // error="Your credit card expired"
+        >
+          <Input
+            onChange={handleChange}
+            value={credential.email}
+            type="email"
+            name="email"
+            id="input-demo"
+            required
+            // placeholder="Your email"
+          />
+        </InputWrapper>
+        <InputWrapper
+          id="password-input"
+          required
           label="Password"
-          placeholder="password"
-        />
+          // description="Please enter your credit card information, we need some money"
+          // error="Your credit card expired"
+        >
+          <Input
+            name="password"
+            required
+            value={credential.password}
+            type="password"
+            onChange={handleChange}
+            id="password-input"
+            // placeholder="Your email"
+          />
+        </InputWrapper>
         <Text color="red.500" fontSize={12} mt={3}>
           {error}
         </Text>

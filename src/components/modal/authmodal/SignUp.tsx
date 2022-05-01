@@ -1,7 +1,6 @@
 import {
   FormControl,
   FormLabel,
-  Input,
   Flex,
   Text,
   ModalBody,
@@ -15,7 +14,7 @@ import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import ReCAPTCHA from 'react-google-recaptcha';
 import GoogleBtn from './GoogleBtn';
-import { Box, Checkbox } from '@mantine/core';
+import { Box, Checkbox, InputWrapper, Input } from '@mantine/core';
 import Label from '@components/common/termsAndServicesLabel';
 
 type Props = { recaptchaRef: React.RefObject<ReCAPTCHA> };
@@ -59,6 +58,7 @@ const SignUp = (props: Props) => {
       return;
     }
 
+    console.log(credential);
     handleForm();
   };
   const handleForm = async () => {
@@ -98,41 +98,57 @@ const SignUp = (props: Props) => {
     <>
       <form onSubmit={onSignUp}>
         <ModalBody>
-          <FormControl>
-            <FormLabel>Email</FormLabel>
+          <InputWrapper
+            id="email-input"
+            required
+            label="Email"
+            // description="Please enter your credit card information, we need some money"
+            // error="Your credit card expired"
+          >
             <Input
-              isRequired
+              required
               value={credential.email}
               name="email"
               type="email"
               onChange={handleChange}
-              placeholder="email"
-              size="sm"
+              id="email-input"
             />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
+          </InputWrapper>
+          <InputWrapper
+            id="password-input"
+            required
+            label="Password"
+            // description="Please enter your credit card information, we need some money"
+            // error="Your credit card expired"
+          >
             <Input
-              isRequired
+              required
               name="password"
               value={credential.password}
               type="password"
               onChange={handleChange}
-              placeholder="password"
-              size="sm"
+              id="password-input"
             />
-          </FormControl>
+          </InputWrapper>
+
           <FormControl>
-            <FormLabel>Confirm Password</FormLabel>
-            <Input
-              isRequired
-              name="confirmPassword"
-              value={credential.confirmPassword}
-              type="password"
-              onChange={handleChange}
-              placeholder="confirm password"
-              size="sm"
-            />
+            <InputWrapper
+              id="confirmPassword-input"
+              required
+              label="Confirm password"
+              // description="Please enter your credit card information, we need some money"
+              // error="Your credit card expired"
+            >
+              <Input
+                required
+                name="confirmPassword"
+                value={credential.confirmPassword}
+                type="password"
+                onChange={handleChange}
+                size="sm"
+                id="confirmPassword-input"
+              />
+            </InputWrapper>
           </FormControl>
           <Text color="red.500" fontSize={12} mt={3}>
             {error}
